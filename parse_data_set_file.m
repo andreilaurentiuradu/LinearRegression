@@ -11,7 +11,10 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
   #data = textscan(file, '%s', m, 'Delimiter', '\n');
 
   % declaram o matrice de cell(sa putem retine si stringuri si numere
-  InitialMatrix = cell(m, n+1);
+  InitialMatrix = cell(m, n);
+
+  % initializam vectorul coloana
+  Y = zeros(m, 1)
 
   %scapam de enter
   fgets(file);
@@ -19,29 +22,21 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
   % stocam in matrice predicatorii si vectorul de iesire
   for i = 1:m
 
-    % citim linia
+    % citim elementul din vectorul de iesire
+    Y(i, 1) = fscanf(file, '%d');
+
+    % citim restul liniei
     line = fgets(file);
+    % luam valorile din line si le punem in values avand ' ' separator
     values = strsplit(line, ' ');
-    for j = 1:n+1
-      %extrage valorile
+
+    for j = 1:n
+      %extrage valorile si le adauga in matrice
       InitialMatrix{i, j} = values{j};
     endfor
 
   endfor
 
-
-
-  % Loop through each line and parse the values
-##  for i = 1:m
-##    values = strsplit(data{1}{i}, ' ');
-##    for j = 1:n+1
-##      InitialMatrix{i,j} = values{j};
-##    end
-##  end
-
-  % Extract Y and x values from InitialMatrix
-##  Y = cellfun(@str2num, InitialMatrix(:,1));
-##  X = cellfun(@str2num, InitialMatrix(:,2:end));
 
   % Close the file
   fclose(file);
