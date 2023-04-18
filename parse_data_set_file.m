@@ -30,7 +30,7 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
     for j = 1:n
       %extrage valorile si le adauga in matrice in functie de tipul lor
       if isletter(values{j}(1))
-        InitialMatrix{i, j} = values{j};
+        InitialMatrix{i, j} = strtrim(values{j});
       else
         InitialMatrix{i, j} = str2double(values{j});
       endif
