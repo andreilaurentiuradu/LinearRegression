@@ -6,9 +6,6 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
   dimensions = fscanf(file, '%d %d', [1, 2]);
   m = dimensions(1)
   n = dimensions(2)
-  Y = 0;
-  % citim restul liniilor in data
-  #data = textscan(file, '%s', m, 'Delimiter', '\n');
 
   % declaram o matrice de cell(sa putem retine si stringuri si numere
   InitialMatrix = cell(m, n);
@@ -31,8 +28,13 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
     values = strsplit(line, ' ');
 
     for j = 1:n
-      %extrage valorile si le adauga in matrice
-      InitialMatrix{i, j} = values{j};
+      %extrage valorile si le adauga in matrice in functie de tipul lor
+      if isletter(values{j}(1))
+        InitialMatrix{i, j} = values{j};
+      else
+        InitialMatrix{i, j} = str2double(values{j});
+      endif
+
     endfor
 
   endfor
