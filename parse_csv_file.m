@@ -20,14 +20,11 @@ function [InitialMatrix, Y] = parse_csv_file(file_path)
     % stergem linia cu numele
     data(1, :) = [];
     [m,n] = size(data)
-    % luam din data elementele tabelului
+    % luam din data elementele tabelului si le punem in Y si InitialMatrix
     InitialMatrix = data(:, 2:end);
-    Y = data(:, 1);
-
     % facem castul elementelor din Y in double
-    for i = 1:m
-      Y(i, 1)= str2double(Y(i,1));
-    endfor
+    Y = str2double(data(:, 1));
+
 
     % scadem prima coloana
     n--;
