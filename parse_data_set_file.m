@@ -4,14 +4,14 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
 
   % citim prima linie
   dimensions = fscanf(file, '%d %d', [1, 2]);
-  m = dimensions(1)
-  n = dimensions(2)
+  m = dimensions(1);
+  n = dimensions(2);
 
   % declaram o matrice de cell(sa putem retine si stringuri si numere
   InitialMatrix = cell(m, n);
 
   % initializam vectorul coloana
-  Y = zeros(m, 1)
+  Y = zeros(m, 1);
 
   %scapam de enter
   fgets(file);
@@ -20,7 +20,7 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
   for i = 1:m
 
     % citim elementul din vectorul de iesire
-    Y(i, 1) = fscanf(file, '%d');
+    Y(i, 1) = fscanf(file, '%lf');# posibil sa iti trebuiasca cast dupa
 
     % citim restul liniei
     line = fgets(file);
@@ -42,4 +42,4 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
 
   % Close the file
   fclose(file);
-end
+endfunction
