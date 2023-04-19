@@ -18,5 +18,5 @@ function [Theta] = gradient_descent(FeatureMatrix, Y, n, m, alpha, iter)
       Theta = Theta - alpha * gradient;
   endfor
 
-
+  #POSIBIL SA TREBUIASCA SA IESI DIN FOR LA O ANUMITA DIFERENTA INTRE REZULTATEs
 endfunction
