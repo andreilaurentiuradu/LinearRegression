@@ -17,19 +17,29 @@ function [InitialMatrix, Y] = parse_csv_file(file_path)
     % punem fiecare element din coloane in cate o pozitie din data
     data = vertcat(data{:});
 
+    % stergem linia cu numele
+    data(1, :) = [];
     [m,n] = size(data)
+    % luam din data elementele tabelului
+    InitialMatrix = data(:, 2:end);
+    Y = data(:, 1);
+
+    % facem castul elementelor din Y in double
+    for i = 1:m
+      Y(i, 1)= str2double(Y(i,1));
+    endfor
+
+    % scadem prima coloana
+    n--;
+
     % facem castul numerelor de la string la double
     for j = 1:n
       % daca primu caracter nu e litera
-      if ~isletter(data{j}(2))
-        for i = 2:m
-          InitialMatrix{i, j} = str2double(data{j});
+      if InitialMatrix{1, j} >= '0' && InitialMatrix{1, j} <= '9'
+        for i = 1:m
+          InitialMatrix{i, j} = str2double(InitialMatrix{i, j});
         endfor
       endif
     endfor
 
-    % extragerea matricei InitialMatrix și vectorului Y
-    InitialMatrix = data(:, 2:end);
-    Y = data(:, 1);
 endfunction
-#########DACA E NEVOIE STERGI PRIMA LINIE(ADICA CAMPUL NUME)
