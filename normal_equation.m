@@ -1,5 +1,5 @@
 # AI GRIJA LA DENUMIRILE MATRICII FEATUREMATRIX VS FEATURESMATRIX VS FEMATRIX
-function [Theta] = normal_equation(FeaturesMatrix, Y, alpha, iter)
+function [Theta] = normal_equation(FeaturesMatrix, Y, tol, iter)
   % Calculează soluția sistemului Ax = b folosind metoda gradientului conjugat
   % FeaturesMatrix: matricea coeficienților sistemului
   % Y: vectorul termenilor liberi
@@ -7,14 +7,17 @@ function [Theta] = normal_equation(FeaturesMatrix, Y, alpha, iter)
   % max_iter/iter: numărul maxim de iterații
   % x/Theta: vectorul soluție
   % Inițializarea variabilelor
+  [m, n] = size(FeaturesMatrix);
+  Theta = zeros(n, 1);
+
   A = FeaturesMatrix' * FeaturesMatrix;
 
   if isPositiveDefinite(A)
     b = FeaturesMatrix' * Y;
-    r = b;
+    r = b - A * Theta;
     v = r;
-    Theta = 0;
-    tolsquared = alpha^2;
+
+    tolsquared = tol^2;
     k = 1;
 
     while k < iter && r' * r > tolsquared
@@ -39,9 +42,8 @@ function [Theta] = normal_equation(FeaturesMatrix, Y, alpha, iter)
       % Incrementăm contorul de iterații
       k = k + 1;
     endwhile
-  else
-    Theta = zeros(Y);
   endif
+    Theta = vertcat(0, Theta);
 endfunction
 
 
