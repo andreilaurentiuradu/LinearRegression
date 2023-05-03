@@ -1,10 +1,10 @@
 function [Error] = lasso_regression_cost_function(Theta, Y, FeMatrix, lambda)
-  % nr de antrenamente
   m = length(Y);
-
-  % cream vectorul h
-  h = FeMatrix * Theta;
-
-  % costul
-  Error = (1/m) * sum((Y - h).^2) + lambda * sum(abs(Theta(1:end))); %2:end
+  Error = 0;
+  Theta = Theta(2:end);
+  for i = 1:m
+    Error = Error + (Y(i) - FeMatrix(i, :) * Theta) ^ 2;
+  endfor
+  Error = Error / m;
+  Error += lambda * sum(abs(Theta(1:end)));
 endfunction
