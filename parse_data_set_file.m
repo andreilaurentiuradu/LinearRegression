@@ -38,7 +38,6 @@ function [Y, InitialMatrix] = parse_data_set_file(file_path)
   Y = InitialMatrix(:, 1);
   InitialMatrix(:, 1) = [];
 
-
   Y = cell2mat(Y);
 
   % Close the file
