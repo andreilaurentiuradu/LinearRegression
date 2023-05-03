@@ -16,5 +16,4 @@ function [isPositiveDef] = isPositiveDefinite(matrix)
   else
     isPositiveDef = false;
   endif
-
 endfunction
