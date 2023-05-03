@@ -1,4 +1,4 @@
-function [InitialMatrix, Y] = parse_csv_file(file_path)
+function [Y, InitialMatrix] = parse_csv_file(file_path)
     % citirea datelor din fișierul CSV
     fid = fopen(file_path);
 
@@ -32,11 +32,12 @@ function [InitialMatrix, Y] = parse_csv_file(file_path)
     % facem castul numerelor de la string la double
     for j = 1:n
       % daca primu caracter nu e litera
-      if InitialMatrix{1, j} >= '0' && InitialMatrix{1, j} <= '9'
+      if InitialMatrix{1, j}(1) >= '0' && InitialMatrix{1, j}(1) <= '9'
         for i = 1:m
           InitialMatrix{i, j} = str2double(InitialMatrix{i, j});
         endfor
       endif
     endfor
+
 
 endfunction
